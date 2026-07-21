@@ -3,6 +3,9 @@
 A small calculator app that **works, but not correctly**. There are **8 bugs**
 hiding in it. Your job is to find them, fix them, and push your fixes back.
 
+Your task board is [TASKS.md](TASKS.md) — work the tickets `CALC-1` to `CALC-8`
+in order.
+
 Nothing to install. No frameworks. Just HTML, CSS and JavaScript.
 
 ## Running it
@@ -33,7 +36,7 @@ Then open <http://localhost:8000>. (The app uses JavaScript modules, so opening
 | [src/ui.js](src/ui.js) | Wires the buttons and keyboard to the calculator. |
 | [index.html](index.html) | The markup for the keypad. |
 | [test/calculator.test.js](test/calculator.test.js) | The tests. **Treat these as the specification.** |
-| [BUGS.md](BUGS.md) | The bug list, with hints. |
+| [TASKS.md](TASKS.md) | **Start here.** The eight tickets, with repro steps and acceptance criteria. |
 
 ## The rules
 
