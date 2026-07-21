@@ -1,0 +1,11 @@
+{
+  "name": "calc-practice",
+  "version": "1.0.0",
+  "description": "A small calculator app with intentional bugs — a debugging exercise.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/",
+    "dev": "python3 -m http.server 8000"
+  },
+  "license": "MIT"
+}
