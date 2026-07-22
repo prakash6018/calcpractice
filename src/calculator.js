@@ -6,7 +6,7 @@ export function add(a, b) {
 }
 
 export function subtract(a, b) {
-  return b - a;
+  return a - b;
 }
 
 export function multiply(a, b) {
@@ -14,18 +14,26 @@ export function multiply(a, b) {
 }
 
 export function divide(a, b) {
+  if (b === 0) {
+    return "Error";
+  }
+
   return a / b;
 }
 
 // Turns a number into its percentage value, e.g. 50 -> 0.5
 export function percent(value) {
-  return value * 100;
+  return value / 100;
 }
 
 // Floating point math leaves artefacts like 0.30000000000000004.
 // Trim them without losing real precision.
 export function round(value) {
-  return value;
+  if (typeof value !== "number") {
+    return value;
+  }
+
+  return Math.round(value * 1e10) / 1e10;
 }
 
 export function operate(a, operator, b) {
@@ -81,22 +89,27 @@ export class Calculator {
       this.overwrite = false;
       return this.display;
     }
-    this.display += '.';
+
+    if (!this.display.includes('.')) {
+      this.display += '.';
+    }
+
     return this.display;
   }
 
   backspace() {
+    if (this.overwrite) {
+      this.display = '0';
+      this.overwrite = false;
+      return this.display;
+    }
+
     this.display = this.display.slice(0, -1);
-    return this.display;
-  }
 
-  toggleSign() {
-    this.display = String(Number(this.display) * -1);
-    return this.display;
-  }
+    if (this.display === '') {
+      this.display = '0';
+    }
 
-  applyPercent() {
-    this.display = String(percent(Number(this.display)));
     return this.display;
   }
 
@@ -116,13 +129,25 @@ export class Calculator {
   }
 
   equals() {
-    if (this.operator === null) return this.display;
+    if (this.operator === null) {
+      return this.display;
+    }
 
     const result = operate(this.stored, this.operator, Number(this.display));
     this.display = String(result);
     this.stored = null;
     this.operator = null;
     this.overwrite = true;
+    return this.display;
+  }
+
+  toggleSign() {
+    this.display = String(Number(this.display) * -1);
+    return this.display;
+  }
+
+  applyPercent() {
+    this.display = String(percent(Number(this.display)));
     return this.display;
   }
 }
